@@ -8,13 +8,15 @@ public class Input : MonoBehaviour
     public int baud = 9600;             //sets the communication rate
 
     private string receivedString;      //takes in value from Serial port
-    public Transform moveableCube;      //to move the cube
-
-    float prevX = 0.0f;                 //previous value
+    Rigidbody moveableCube;             //to move the cube
+    Transform transformCube;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        moveableCube = GetComponent<Rigidbody>();
+        transformCube = GetComponent<Transform>();
+
         //Opens the port to get values
         dataStream = new SerialPort(serialPort, baud);
         dataStream.Open();
@@ -27,23 +29,19 @@ public class Input : MonoBehaviour
         receivedString = dataStream.ReadLine();
         //Debug.Log(receivedString);
         //Parses values into an array
-        string[] substrings = receivedString.Split(',');
-        /*float height = float.Parse(substrings[0]) * 0.1f;
-        Debug.Log("height: "+ height);
-        moveableCube.transform.position = new Vector3(moveableCube.transform.position.x, height, 
-            moveableCube.transform.position.z);*/
+        //string[] substrings = receivedString.Split(',');
+        float newY = float.Parse(receivedString);
 
-        if(substrings.Length >= 2)
+        //if (substrings.Length >= 1)
         {
             //Debug.Log(substrings[0]);                         //prints Hi
-            float newY = float.Parse(substrings[1]);            //takes mapped value from arduino
-            //newX = newX / 100.0f;                             //scales it to get decimal precision
-            //float deltaX = (newY - prevX);
-            //Debug.Log("Delta X: "+ deltaX);
-
+            //float newY = float.Parse(substrings[1]);            //takes mapped value from arduino
+            Debug.Log("newY: :"+ newY);
             //Moves the cube
-            moveableCube.Translate(0, Time.deltaTime * newY, 0);
-            //prevX = newY;
+            Vector3 targetPosition = new Vector3(transformCube.position.x, newY, transformCube.position.z);
+            transformCube.position = Vector3.Lerp(transformCube.position, targetPosition, Time.deltaTime * 5.0f);
+                //new Vector3(this.transform.position.x, newY, transform.position.z);
+
         }
         dataStream.ReadExisting();
     }
