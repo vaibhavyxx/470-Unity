@@ -28,23 +28,23 @@ public class Input : MonoBehaviour
         //Debug.Log(receivedString);
         //Parses values into an array
         string[] substrings = receivedString.Split(',');
-        float height = float.Parse(substrings[0]) * 0.1f;
+        /*float height = float.Parse(substrings[0]) * 0.1f;
         Debug.Log("height: "+ height);
         moveableCube.transform.position = new Vector3(moveableCube.transform.position.x, height, 
-            moveableCube.transform.position.z);
+            moveableCube.transform.position.z);*/
 
-        /*if(substrings.Length > 2)
+        if(substrings.Length >= 2)
         {
             //Debug.Log(substrings[0]);                         //prints Hi
-            float newX = float.Parse(substrings[2]);            //takes mapped value from arduino
+            float newY = float.Parse(substrings[1]);            //takes mapped value from arduino
             //newX = newX / 100.0f;                             //scales it to get decimal precision
-            float deltaX = (newX - prevX);
-            Debug.Log("Delta X: "+ deltaX);
+            //float deltaX = (newY - prevX);
+            //Debug.Log("Delta X: "+ deltaX);
 
             //Moves the cube
-            moveableCube.Translate(deltaX * Time.deltaTime, 0, 0);
-            prevX = newX;
-        }*/
+            moveableCube.Translate(0, Time.deltaTime * newY, 0);
+            //prevX = newY;
+        }
         dataStream.ReadExisting();
     }
 }
