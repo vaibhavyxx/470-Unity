@@ -28,8 +28,12 @@ public class Input : MonoBehaviour
         //Debug.Log(receivedString);
         //Parses values into an array
         string[] substrings = receivedString.Split(',');
-       
-        if(substrings.Length > 2)
+        float height = float.Parse(substrings[0]) * 0.1f;
+        Debug.Log("height: "+ height);
+        moveableCube.transform.position = new Vector3(moveableCube.transform.position.x, height, 
+            moveableCube.transform.position.z);
+
+        /*if(substrings.Length > 2)
         {
             //Debug.Log(substrings[0]);                         //prints Hi
             float newX = float.Parse(substrings[2]);            //takes mapped value from arduino
@@ -40,7 +44,7 @@ public class Input : MonoBehaviour
             //Moves the cube
             moveableCube.Translate(deltaX * Time.deltaTime, 0, 0);
             prevX = newX;
-        }
+        }*/
         dataStream.ReadExisting();
     }
 }
