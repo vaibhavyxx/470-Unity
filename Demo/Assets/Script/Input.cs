@@ -33,7 +33,7 @@ public class Input : MonoBehaviour
             Debug.Log("Jump: "+ jumpY);
             if(jumpY> 0 && prevJump == 0)
             {
-                moveableCube.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
+                moveableCube.AddForce(new Vector3(0, 5f, 0), ForceMode.Impulse);
             }
 
             //prevJump = jumpY;
