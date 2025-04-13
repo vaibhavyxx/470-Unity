@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 142134844}
   - component: {fileID: 142134849}
   - component: {fileID: 142134850}
+  - component: {fileID: 142134851}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -607,8 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e7434f49636134b9053f2143be3bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 0, y: 0, z: -0.5}
-  jump: {x: 0, y: 5, z: 0}
+  speed: {x: 0, y: 0, z: -0.05}
 --- !u!114 &142134850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,19 +655,7 @@ MonoBehaviour:
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 142134849}
-        m_TargetAssemblyTypeName: Move, Assembly-CSharp
-        m_MethodName: onJump
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
@@ -727,6 +715,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &142134851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142134843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779b350e41c417344a6e18270267f5d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serialPort: COM3
+  baud: 9600
 --- !u!1 &405098876
 GameObject:
   m_ObjectHideFlags: 0

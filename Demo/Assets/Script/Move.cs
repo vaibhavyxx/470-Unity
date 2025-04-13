@@ -7,7 +7,7 @@ public class Move : MonoBehaviour
     Vector3 initialPosition;
     bool isGrounded = false;
     public Vector3 speed = new Vector3(5.0f, 0.0f, 0.0f);
-    public Vector3 jump = new Vector3( 0.0f, 10.0f, 0.0f);
+    //public Vector3 jump = new Vector3( 0.0f, 10.0f, 0.0f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +20,7 @@ public class Move : MonoBehaviour
     void Update()
     {
         //rb.linearVelocity = speed;
-        rb.AddForce(speed, ForceMode.VelocityChange);
+        //rb.AddForce(speed, ForceMode.VelocityChange);
 
         //if it falls off the ground, resets to initial point
         if(rb.transform.position.y < 0.0f)
@@ -38,30 +38,4 @@ public class Move : MonoBehaviour
         }
     }
 
-    //To make the ball jump
-    public void onJump()
-    {
-        if(isGrounded)
-        {
-            rb.AddForce(jump, ForceMode.Impulse);
-            isGrounded= false;
-        }
-    }
-
-    //Toggles between whether the player is jumping or not
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("PlayerGround"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("PlayerGround"))
-        {
-            isGrounded = false;
-        }
-    }
 }

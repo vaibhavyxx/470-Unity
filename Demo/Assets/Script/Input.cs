@@ -10,6 +10,7 @@ public class Input : MonoBehaviour
     private string receivedString;      //takes in value from Serial port
     Rigidbody moveableCube;             //to move the cube
     Transform transformCube;
+    float prevJump;                     //keeps track of jump delta values
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,24 +26,18 @@ public class Input : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Prints out the values from arduino to the consolea
-        receivedString = dataStream.ReadLine();
-        //Debug.Log(receivedString);
-        //Parses values into an array
-        //string[] substrings = receivedString.Split(',');
-        float newY = float.Parse(receivedString);
-
-        //if (substrings.Length >= 1)
+        if (dataStream.IsOpen)
         {
-            //Debug.Log(substrings[0]);                         //prints Hi
-            //float newY = float.Parse(substrings[1]);            //takes mapped value from arduino
-            Debug.Log("newY: :"+ newY);
-            //Moves the cube
-            Vector3 targetPosition = new Vector3(transformCube.position.x, newY, transformCube.position.z);
-            transformCube.position = Vector3.Lerp(transformCube.position, targetPosition, Time.deltaTime * 5.0f);
-                //new Vector3(this.transform.position.x, newY, transform.position.z);
+            receivedString = dataStream.ReadLine();
+            float jumpY = float.Parse(receivedString);
+            Debug.Log("Jump: "+ jumpY);
+            if(jumpY> 0 && prevJump == 0)
+            {
+                moveableCube.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
+            }
 
+            //prevJump = jumpY;
+            prevJump = jumpY;
         }
-        dataStream.ReadExisting();
     }
 }
