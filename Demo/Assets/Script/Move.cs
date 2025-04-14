@@ -4,38 +4,34 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     Rigidbody rb;
+    Transform transform;
     Vector3 initialPosition;
-    bool isGrounded = false;
-    public Vector3 speed = new Vector3(5.0f, 0.0f, 0.0f);
+    public float speed = -5.0f;
+    //public Vector3 speed = new Vector3(5.0f, 0.0f, 0.0f);
     //public Vector3 jump = new Vector3( 0.0f, 10.0f, 0.0f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        transform = GetComponent<Transform>();
         initialPosition = rb.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //rb.linearVelocity = speed;
-        //rb.AddForce(speed, ForceMode.VelocityChange);
-
-        //if it falls off the ground, resets to initial point
-        if(rb.transform.position.y < 0.0f)
-        {
-            this.rb.transform.position = initialPosition;
-        }
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+       
     }
 
-    //If falls on the ground, resets back to square 1
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            this.rb.transform.position = initialPosition;
+            this.transform.position = initialPosition;
         }
     }
+
 
 }
