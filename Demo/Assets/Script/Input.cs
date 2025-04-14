@@ -26,18 +26,30 @@ public class Input : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dataStream.IsOpen)
+        try
         {
-            receivedString = dataStream.ReadLine();
-            float jumpY = float.Parse(receivedString);
-            Debug.Log("Jump: "+ jumpY);
-            if(jumpY> 0 && prevJump == 0)
+            if (dataStream.IsOpen)
             {
-                moveableCube.AddForce(new Vector3(0, 5f, 0), ForceMode.Impulse);
-            }
+                receivedString = dataStream.ReadLine();
+                string[] values = receivedString.Split(',');
 
-            //prevJump = jumpY;
-            prevJump = jumpY;
+                float jumpY = float.Parse(values[0]);
+                Debug.Log("Jump: " + jumpY + ", Coordinates RAW: " + values[1] + ", Coordinates: " + values[2]);
+
+                //for jumping
+                if (jumpY > 0 && prevJump == 0)
+                {
+                    moveableCube.AddForce(new Vector3(0, 5f, 0), ForceMode.Impulse);
+                }
+
+                //prevJump = jumpY;
+                prevJump = jumpY;
+            }
         }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning("Serial read error: " + e.Message);
+        }
+        
     }
 }
