@@ -7,8 +7,7 @@ public class Move : MonoBehaviour
     Transform transform;
     Vector3 initialPosition;
     public float speed = -5.0f;
-    //public Vector3 speed = new Vector3(5.0f, 0.0f, 0.0f);
-    //public Vector3 jump = new Vector3( 0.0f, 10.0f, 0.0f);
+    GameObject text;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +29,15 @@ public class Move : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             this.transform.position = initialPosition;
+            text.SetActive(false);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            //rb.linearVelocity = Vector3.zero;
         }
     }
 

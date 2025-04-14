@@ -32,9 +32,9 @@ public class Input : MonoBehaviour
             if (dataStream.IsOpen)
             {
                 receivedString = dataStream.ReadLine();
-                string[] values = receivedString.Split(',');
+                //string[] values = receivedString.Split(',');
 
-                float jumpY = float.Parse(values[0]);  
+                float jumpY = float.Parse(receivedString);  
                 Debug.Log("Jump: " + jumpY);
 
                 //for jumping
